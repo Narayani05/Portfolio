@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Narayani S — Content Writer & Marketer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --coral: #FF5E5B;
+    --yellow: #FFED66;
+    --teal: #00CECB;
+    --navy: #14213D;
+    --lavender: #C9B8FF;
+    --mint: #B5EAD7;
+    --peach: #FFD6C0;
+    --white: #FFFEF7;
+    --ink: #1A1A2E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(255,254,247,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--navy);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--navy);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: .85rem; font-weight: 600; text-decoration: none;
+    color: var(--navy); letter-spacing: .06em; text-transform: uppercase;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px;
+    background: var(--coral); transform: scaleX(0); transition: transform .3s;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+    padding: 7rem 3rem 4rem;
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,94,91,.35) 0%, transparent 70%);
+    top: -150px; right: -100px; pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,206,203,.25) 0%, transparent 70%);
+    bottom: -100px; left: 100px; pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-block;
+    background: var(--yellow); color: var(--navy);
+    font-family: 'Space Mono', monospace; font-size: .75rem; font-weight: 700;
+    padding: .35rem .9rem; border-radius: 2rem; letter-spacing: .08em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--white);
+    animation: fadeUp .6s .15s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--coral);
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(255,254,247,.7);
+    margin-top: 1.5rem; max-width: 440px; line-height: 1.7;
+    animation: fadeUp .6s .3s ease both;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    animation: fadeUp .6s .45s ease both;
+  }
+  .btn {
+    padding: .8rem 2rem; border-radius: 3rem; font-weight: 600;
+    font-size: .9rem; text-decoration: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    display: inline-block;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .btn-primary { background: var(--coral); color: var(--white); border: 2px solid var(--coral); }
+  .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,254,247,.4); }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    background: linear-gradient(135deg, var(--coral), var(--lavender));
+    border-radius: 2rem; padding: 3rem 2.5rem;
+    max-width: 380px; width: 100%;
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  .hero-card-stat {
+    font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900;
+    color: var(--white); line-height: 1;
+  }
+  .hero-card-label {
+    font-size: .85rem; color: rgba(255,255,255,.8); margin-top: .3rem;
+    font-weight: 500; letter-spacing: .05em;
+  }
+  .hero-card-divider { height: 1px; background: rgba(255,255,255,.3); margin: 1.5rem 0; }
+  .hero-card-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .tag-pill {
+    background: rgba(255,255,255,.25); color: var(--white);
+    padding: .3rem .85rem; border-radius: 1rem; font-size: .78rem; font-weight: 600;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 6rem 3rem;
+    background: var(--yellow);
+    display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center;
+  }
+  .about-label {
+    font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--navy); opacity: .6; margin-bottom: .5rem;
+  }
+  .about-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--navy);
+  }
+  .about-body {
+    font-size: 1.05rem; line-height: 1.8; color: var(--navy);
+    max-width: 580px;
+  }
+  .about-body strong { color: var(--coral); }
+
+  /* ── SECTION GENERIC ── */
+  .section { padding: 6rem 3rem; }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: .7rem;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: .5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--navy);
+  }
+  .section-sub {
+    font-size: 1rem; color: rgba(26,26,46,.65); margin-top: .75rem;
+    max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.7;
+  }
+
+  /* ── BLOGS ── */
+  #blogs { background: var(--white); }
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .blog-card {
+    border: 2px solid var(--navy);
+    border-radius: 1.5rem; overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    background: var(--white);
+  }
+  .blog-card:hover { transform: translateY(-6px); box-shadow: 6px 6px 0 var(--navy); }
+  .blog-card-color {
+    height: 8px;
+  }
+  .bc-1 { background: var(--coral); }
+  .bc-2 { background: var(--teal); }
+  .bc-3 { background: var(--lavender); }
+  .bc-4 { background: var(--yellow); }
+  .blog-card-body { padding: 1.5rem; }
+  .blog-badge {
+    font-family: 'Space Mono', monospace; font-size: .68rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: .6rem; display: block;
+  }
+  .blog-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    color: var(--navy); line-height: 1.3; margin-bottom: .6rem;
+  }
+  .blog-card p { font-size: .88rem; color: rgba(26,26,46,.7); line-height: 1.65; }
+  .blog-link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    margin-top: 1rem; font-size: .82rem; font-weight: 700;
+    color: var(--navy); text-decoration: none;
+    border-bottom: 2px solid var(--teal); padding-bottom: 1px;
+  }
+  .blog-link:hover { color: var(--coral); border-color: var(--coral); }
+
+  /* ── CAROUSELS ── */
+  #carousels { background: var(--navy); }
+  #carousels .section-title { color: var(--white); }
+  #carousels .section-sub { color: rgba(255,254,247,.6); }
+  #carousels .section-eyebrow { color: var(--teal); }
+  .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+  .carousel-card {
+    border-radius: 1.2rem; padding: 1.8rem;
+    position: relative; overflow: hidden;
+    transition: transform .25s;
+    cursor: pointer;
+  }
+  .carousel-card:hover { transform: scale(1.03); }
+  .cc-1 { background: linear-gradient(135deg, var(--coral), #ff8a5b); }
+  .cc-2 { background: linear-gradient(135deg, var(--teal), #00a8a6); }
+  .cc-3 { background: linear-gradient(135deg, var(--lavender), #a28dff); }
+  .cc-4 { background: linear-gradient(135deg, var(--yellow), #ffc107); }
+  .carousel-num {
+    font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900;
+    color: rgba(255,255,255,.2); line-height: 1; position: absolute;
+    top: .5rem; right: 1rem;
+  }
+  .carousel-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    color: var(--white); position: relative; z-index: 1; line-height: 1.3;
+    margin-bottom: .5rem;
+  }
+  .carousel-card a {
+    font-size: .78rem; color: rgba(255,255,255,.85); text-decoration: none;
+    font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.4);
+  }
+
+  /* ── VIDEOS ── */
+  #videos { background: var(--mint); }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .video-card {
+    background: var(--white); border: 2px solid var(--navy);
+    border-radius: 1.5rem; padding: 1.8rem;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .video-card:hover { transform: translateY(-5px); box-shadow: 5px 5px 0 var(--navy); }
+  .video-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--coral); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .video-icon svg { fill: white; width: 20px; height: 20px; }
+  .video-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    color: var(--navy); margin-bottom: .5rem;
+  }
+  .video-card a {
+    display: inline-flex; align-items: center; gap: .35rem;
+    margin-top: .8rem; font-size: .8rem; font-weight: 700;
+    color: var(--coral); text-decoration: none;
+  }
+
+  /* ── PARODY / COMIC ── */
+  #creative { background: var(--peach); }
+  .creative-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .creative-block {
+    background: var(--white); border: 2px solid var(--navy);
+    border-radius: 1.5rem; padding: 2rem;
+  }
+  .creative-block h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.6rem;
+    color: var(--navy); margin-bottom: .5rem;
+  }
+  .creative-block p { font-size: .9rem; color: rgba(26,26,46,.7); line-height: 1.7; }
+  .season-list { list-style: none; margin-top: 1rem; }
+  .season-list li {
+    padding: .6rem 0; border-bottom: 1px dashed rgba(26,26,46,.2);
+    font-weight: 600; font-size: .9rem;
+  }
+  .season-list a { color: var(--navy); text-decoration: none; }
+  .season-list a:hover { color: var(--coral); }
+  .parody-dot {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    margin-right: .5rem;
+  }
+
+  /* ── NEWSLETTER ── */
+  #newsletter { background: var(--lavender); }
+  #newsletter .section-title { color: var(--navy); }
+  .nl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .nl-card {
+    background: var(--white); border: 2px solid var(--navy);
+    border-radius: 1.5rem; padding: 2rem;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .nl-card:hover { transform: translateY(-5px); box-shadow: 5px 5px 0 var(--navy); }
+  .nl-label {
+    font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: .5rem; display: block;
+  }
+  .nl-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    color: var(--navy); line-height: 1.3; margin-bottom: .6rem;
+  }
+  .nl-card a {
+    font-size: .8rem; font-weight: 700; color: var(--coral); text-decoration: none;
+  }
+
+  /* ── COPYWRITING ── */
+  #copywriting { background: var(--white); }
+  .copy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .copy-card {
+    border-radius: 1.2rem; padding: 1.8rem;
+    border: 2px solid var(--navy);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .copy-card:hover { transform: translateY(-5px); box-shadow: 5px 5px 0 var(--navy); }
+  .co-1 { background: var(--coral); color: var(--white); }
+  .co-2 { background: var(--teal); color: var(--white); }
+  .co-3 { background: var(--navy); color: var(--white); }
+  .copy-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: .5rem; }
+  .copy-card p { font-size: .85rem; opacity: .85; line-height: 1.65; }
+  .copy-card a { font-size: .8rem; font-weight: 700; color: var(--yellow); text-decoration: none; margin-top: .8rem; display: inline-block; }
+
+  /* ── GHOSTWRITING ── */
+  #ghostwriting { background: var(--navy); }
+  #ghostwriting .section-title { color: var(--white); }
+  #ghostwriting .section-sub { color: rgba(255,254,247,.6); }
+  #ghostwriting .section-eyebrow { color: var(--yellow); }
+  .ghost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .ghost-card {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+    border-radius: 1.5rem; padding: 2rem;
+    transition: background .3s, border-color .3s;
+  }
+  .ghost-card:hover { background: rgba(255,255,255,.12); border-color: var(--teal); }
+  .ghost-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    color: var(--white); margin-bottom: .6rem;
+  }
+  .ghost-card p { font-size: .88rem; color: rgba(255,254,247,.65); line-height: 1.7; }
+  .ghost-card a {
+    font-size: .8rem; font-weight: 700; color: var(--teal);
+    text-decoration: none; margin-top: .8rem; display: inline-block;
+  }
+
+  /* ── SHOUTOUTS ── */
+  #shoutouts { background: var(--yellow); }
+  .shout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+  .shout-card {
+    background: var(--white); border: 2px solid var(--navy);
+    border-radius: 1.5rem; padding: 1.8rem;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .shout-card:hover { transform: translateY(-5px); box-shadow: 5px 5px 0 var(--navy); }
+  .shout-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .shout-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy);
+    margin-bottom: .5rem;
+  }
+  .shout-card p { font-size: .85rem; color: rgba(26,26,46,.7); line-height: 1.65; }
+  .shout-card a {
+    font-size: .78rem; font-weight: 700; color: var(--coral);
+    text-decoration: none; margin-top: .8rem; display: inline-block;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--coral);
+    padding: 6rem 3rem; text-align: center;
+  }
+  .contact h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem); color: var(--white);
+    font-weight: 900; margin-bottom: 1rem;
+  }
+  .contact p { font-size: 1rem; color: rgba(255,255,255,.85); margin-bottom: 2rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .contact-btn {
+    padding: .8rem 2rem; border-radius: 3rem; font-weight: 700;
+    font-size: .9rem; text-decoration: none; display: inline-block;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+  .contact-btn-dark { background: var(--navy); color: var(--white); }
+  .contact-btn-light { background: var(--white); color: var(--coral); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,254,247,.5);
+    text-align: center; padding: 1.5rem;
+    font-size: .8rem; font-family: 'Space Mono', monospace;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+    .hero-visual { display: none; }
+    .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .creative-grid, .nl-grid, .ghost-grid { grid-template-columns: 1fr; }
+    .copy-grid { grid-template-columns: 1fr 1fr; }
+    .contact { padding: 4rem 1.5rem; }
+  }
+  @media (max-width: 560px) {
+    .copy-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Narayani S.</div>
+  <ul class="nav-links">
+    <li><a href="#blogs">Blogs</a></li>
+    <li><a href="#carousels">Carousels</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#creative">Creative</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#copywriting">Copy</a></li>
+    <li><a href="#shoutouts">Shoutouts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">✦ Content Writer & Marketer</div>
+    <h1>I make ideas <em>impossible</em> to ignore.</h1>
+    <p class="hero-sub">Messy concepts, complex fintech, dry industry topics — I turn them all into stories that stick in your head (and on Google's first page).</p>
+    <div class="hero-cta">
+      <a href="#blogs" class="btn btn-primary">See My Work</a>
+      <a href="mailto:narayani.sri2000@gmail.com" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-stat">100+</div>
+      <div class="hero-card-label">Blogs written & published</div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-stat" style="font-size:2.2rem;">20K+</div>
+      <div class="hero-card-label">LinkedIn impressions on single posts</div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-tags">
+        <span class="tag-pill">Blogs</span>
+        <span class="tag-pill">Carousels</span>
+        <span class="tag-pill">Videos</span>
+        <span class="tag-pill">Copywriting</span>
+        <span class="tag-pill">Newsletters</span>
+        <span class="tag-pill">Comic Books</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal">
+  <div>
+    <div class="about-label">Who I am</div>
+    <div class="about-heading">Full-stack storyteller.</div>
+  </div>
+  <p class="about-body">
+    I'm Narayani — a content writer and marketer who loves simplifying complex topics into easy-to-read stories.
+    Whether it's a <strong>fintech explainer</strong>, a <strong>viral LinkedIn post</strong>, or the <strong>industry's first chargeback comic book</strong>,
+    I bring a full-stack approach — blending creativity, clarity, and marketing insight
+    to make every piece of content work harder for your brand.
+  </p>
+</section>
+
+<!-- BLOGS -->
+<section class="section" id="blogs">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Written Word</div>
+    <h2 class="section-title">Blogs That Rank & Resonate</h2>
+    <p class="section-sub">From product explainers to thought leadership — 100+ blogs that keep readers curious and coming back for more.</p>
+  </div>
+  <div class="blog-grid reveal">
+    <div class="blog-card">
+      <div class="blog-card-color bc-1"></div>
+      <div class="blog-card-body">
+        <span class="blog-badge">🏆 #1 on Google</span>
+        <h3>Google's Top Spot</h3>
+        <p>A blog that continues to rank #1 on Google through clear, well-structured content and organic SEO strategy.</p>
+        <a href="https://backspace-tech.medium.com/aft-and-oct-cracking-two-peas-in-a-pod-e07e8dfae366" target="_blank" class="blog-link">Read Article →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-color bc-2"></div>
+      <div class="blog-card-body">
+        <span class="blog-badge">✨ Relatable Storytelling</span>
+        <h3>Stories You Can See Yourself In</h3>
+        <p>Explains product features through relatable, real-life scenarios — making complex content easy to connect with.</p>
+        <a href="https://backspace-tech.medium.com/the-dispute-communication-cardholder-letter-cd34b27f8318" target="_blank" class="blog-link">Read Article →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-color bc-3"></div>
+      <div class="blog-card-body">
+        <span class="blog-badge">🎬 Pop Culture Hook</span>
+        <h3>Straight Out of the Movies</h3>
+        <p>Connects complex industry concepts with familiar movie scenes to make them instantly relatable and memorable.</p>
+        <a href="https://backspace-tech.medium.com/a-case-of-fraud-classification-a-sherlock-holmess-mystery-29ea699d095f" target="_blank" class="blog-link">Read Article →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-color bc-4"></div>
+      <div class="blog-card-body">
+        <span class="blog-badge">📣 LinkedIn Spotlight</span>
+        <h3>The LinkedIn Spotlight</h3>
+        <p>In-depth analysis so good it was personally shared by Prakhar Jain, India Head at Fave Payments, on LinkedIn.</p>
+        <a href="https://backspace-tech.medium.com/rupay-desi-at-heart-global-in-reach-213f69db9ee3" target="_blank" class="blog-link">Read Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAROUSELS -->
+<section class="section" id="carousels">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Social Content</div>
+    <h2 class="section-title">Scroll-Stopping Carousels</h2>
+    <p class="section-sub">Breaking down complex ideas into clear, visual content that drives meaningful engagement on social media.</p>
+  </div>
+  <div class="carousel-grid reveal">
+    <div class="carousel-card cc-1">
+      <div class="carousel-num">01</div>
+      <h3>From Coffee to Chandigarh</h3>
+      <a href="https://drive.google.com/file/d/1Oye4SUk0La-bG9slZtHxgAkN6xJgIbU6/view?usp=sharing" target="_blank">View Carousel →</a>
+    </div>
+    <div class="carousel-card cc-2">
+      <div class="carousel-num">02</div>
+      <h3>Biryani is Worth the Wait</h3>
+      <a href="https://drive.google.com/file/d/1jYh4DCg2Ca1AoE8cMLsWdO4WqP8bGW51/view?usp=sharing" target="_blank">View Carousel →</a>
+    </div>
+    <div class="carousel-card cc-3">
+      <div class="carousel-num">03</div>
+      <h3>The Frenzy You Can't Ignore</h3>
+      <a href="https://drive.google.com/file/d/1C7bmCih9vrxigmJ9DZ_17QVjyp2KqNZd/view?usp=sharing" target="_blank">View Carousel →</a>
+    </div>
+    <div class="carousel-card cc-4" style="color: var(--navy)">
+      <div class="carousel-num" style="color: rgba(0,0,0,.15)">04</div>
+      <h3 style="color: var(--navy)">Who Holds the Power?</h3>
+      <a href="https://drive.google.com/file/d/1_3pBa1W57mq64MGvmneVjNeOLIw1v3VW/view?usp=sharing" target="_blank" style="color: var(--navy); border-color: rgba(0,0,0,.4)">View Carousel →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="section" id="videos">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Video Scripts</div>
+    <h2 class="section-title">Videos That Educate & Entertain</h2>
+    <p class="section-sub">Ideated, scripted, and structured for Instagram and LinkedIn — making payments simple and engaging.</p>
+  </div>
+  <div class="video-grid reveal">
+    <div class="video-card">
+      <div class="video-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3>Where Does Your 2% Go?</h3>
+      <p style="font-size:.86rem; color:rgba(26,26,46,.65); line-height:1.65;">Demystifying transaction fees in a relatable, engaging reel.</p>
+      <a href="https://www.instagram.com/reel/DVyFNu1AJww/" target="_blank">Watch on Instagram ↗</a>
+    </div>
+    <div class="video-card">
+      <div class="video-icon" style="background: var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3>Zero Balance From April</h3>
+      <p style="font-size:.86rem; color:rgba(26,26,46,.65); line-height:1.65;">Breaking down a regulatory change that affects millions of accounts.</p>
+      <a href="https://www.instagram.com/reel/DUSQt6fExP8/" target="_blank">Watch on Instagram ↗</a>
+    </div>
+    <div class="video-card">
+      <div class="video-icon" style="background: var(--lavender);">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3>The Dispute Game Plan</h3>
+      <p style="font-size:.86rem; color:rgba(26,26,46,.65); line-height:1.65;">A strategic explainer on navigating payment disputes with clarity.</p>
+      <a href="https://www.instagram.com/reel/DR1wkYik9RQ/" target="_blank">Watch on Instagram ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARODY + COMIC -->
+<section class="section" id="creative">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Creative Formats</div>
+    <h2 class="section-title">When Finance Meets Storytelling</h2>
+    <p class="section-sub">Parody series, comic books — because even the driest topics deserve to be a good story.</p>
+  </div>
+  <div class="creative-grid reveal">
+    <div class="creative-block">
+      <h2>🎭 Parody Series</h2>
+      <p>Co-ideated a parody series that explains fintech and payment concepts through humor and satire — making them easy, memorable, and genuinely fun for any audience.</p>
+    </div>
+    <div class="creative-block" style="background: var(--navy); border-color: var(--navy);">
+      <h2 style="color: var(--yellow);">📚 Comic Book</h2>
+      <p style="color: rgba(255,254,247,.7);">Co-authored the fintech industry's <strong style="color:var(--teal);">first comic book</strong> on disputes and chargebacks — proving even the most technical topics can be a great story.</p>
+      <ul class="season-list" style="border-top: 1px dashed rgba(255,255,255,.2); margin-top: 1rem; padding-top: .5rem;">
+        <li style="border-color: rgba(255,255,255,.15); color: var(--white);">
+          <span class="parody-dot" style="background: var(--coral);"></span>
+          <a href="https://drive.google.com/file/d/1HPI0zAWzaVix20TnK5AGmO0HWrBxXwFM/view?usp=sharing" target="_blank" style="color: var(--white);">Season 1 — The Prelude</a>
+        </li>
+        <li style="border-color: rgba(255,255,255,.15); color: var(--white);">
+          <span class="parody-dot" style="background: var(--teal);"></span>
+          <a href="https://drive.google.com/file/d/17RWAm00LmLH0KYF4ynnyu-K7ly4NIxAd/view?usp=sharing" target="_blank" style="color: var(--white);">Season 2 — The Unraveling</a>
+        </li>
+        <li style="border-color: rgba(255,255,255,.15); color: var(--white);">
+          <span class="parody-dot" style="background: var(--lavender);"></span>
+          <a href="https://drive.google.com/file/d/1OFpjV8QS_GC855-xHgO3UM4nU6DaaKJ0/view?usp=sharing" target="_blank" style="color: var(--white);">Season 3 — The Resolution</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="newsletter">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Newsletter</div>
+    <h2 class="section-title">Fortnightly Deep Dives</h2>
+    <p class="section-sub">End-to-end newsletter management — from idea to final structure, every edition crafted with intention.</p>
+  </div>
+  <div class="nl-grid reveal">
+    <div class="nl-card">
+      <span class="nl-label">RBI · ODR Framework</span>
+      <h3>When Delay Becomes the Problem</h3>
+      <p style="font-size:.87rem; color:rgba(26,26,46,.7); line-height:1.7;">A sharp take on how delays in dispute resolution erode trust, inflate costs, and damage customer experience.</p>
+      <a href="https://www.linkedin.com/pulse/odr-online-dispute-resolution-backspace-tech-india-jadmc" target="_blank">Read Edition →</a>
+    </div>
+    <div class="nl-card">
+      <span class="nl-label">Payments · MDR Debate</span>
+      <h3>Who Pays for Free Payments?</h3>
+      <p style="font-size:.87rem; color:rgba(26,26,46,.7); line-height:1.7;">Frames the zero MDR debate as a face-off between merchants and processors — exploring inclusion versus sustainability.</p>
+      <a href="https://www.linkedin.com/pulse/mdr-incentive-burden-backspace-tech-india-svekc" target="_blank">Read Edition →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COPYWRITING -->
+<section class="section" id="copywriting">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Copywriting</div>
+    <h2 class="section-title">Words That Work Hard</h2>
+    <p class="section-sub">Honed through an intensive workshop by Hinglish Copywriting Service, mentored by Shubham Gune.</p>
+  </div>
+  <div class="copy-grid reveal">
+    <div class="copy-card co-1">
+      <h3>Insta Bios</h3>
+      <p>Instagram bios for D2C and B2C brands across electronics and cosmetics — generating over 20K impressions on LinkedIn.</p>
+      <a href="https://www.linkedin.com/posts/narayani-s_brand-instagram-bios-activity-7291689866499698688-Mkni" target="_blank">View on LinkedIn →</a>
+    </div>
+    <div class="copy-card co-2">
+      <h3>OOH Ads</h3>
+      <p>Out-of-home ad concepts for language learning and pet food brands, gaining 2K+ impressions on LinkedIn.</p>
+      <a href="https://www.linkedin.com/posts/narayani-s_ooh-ads-part-2-activity-7295787563720589312-B0Q3" target="_blank">View on LinkedIn →</a>
+    </div>
+    <div class="copy-card co-3">
+      <h3>Hinglish Campaign</h3>
+      <p>A full campaign for Hinglish Copywriting Service that hit 2K+ LinkedIn impressions through culturally sharp messaging.</p>
+      <a href="https://www.linkedin.com/posts/narayani-s_hinglish-campaign-activity-7292874630032150528-nQdN" target="_blank">View on LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GHOSTWRITING -->
+<section class="section" id="ghostwriting">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Portfolio · Ghostwriting</div>
+    <h2 class="section-title">Behind the Voice</h2>
+    <p class="section-sub">Writing LinkedIn posts for a co-founder — shaping his voice and strengthening his personal brand on the platform.</p>
+  </div>
+  <div class="ghost-grid reveal">
+    <div class="ghost-card">
+      <h3>Sealing New Alliances</h3>
+      <p>Reimagined a fintech graduation announcement with a Tum Hi Ho lyric hook — turning a corporate update into a viral LinkedIn moment.</p>
+      <a href="https://www.linkedin.com/posts/praveen-krishna-dev_glimpses-of-finxcelerator-20-graduation-activity-7301137954779889664-qaZU" target="_blank">View Post →</a>
+    </div>
+    <div class="ghost-card">
+      <h3>The Reflection</h3>
+      <p>Used Darwin's theory of evolution as an analogy to make the case for automated dispute management — relatable, compelling, and memorable.</p>
+      <a href="https://www.linkedin.com/posts/praveen-krishna-dev_pkdev-backspacetech-udm-activity-7292754738335338498-cdT7" target="_blank">View Post →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOUTOUTS -->
+<section class="section" id="shoutouts">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Recognition</div>
+    <h2 class="section-title">The Shoutouts 🎉</h2>
+    <p class="section-sub">A snapshot of achievements and recognition received along the way.</p>
+  </div>
+  <div class="shout-grid reveal">
+    <div class="shout-card">
+      <div class="shout-icon">🥉</div>
+      <h3>Fueler Meme Marketing</h3>
+      <p>Secured 2nd runner-up in Fueler's meme marketing challenge — a career portfolio platform with a national reach.</p>
+      <a href="https://www.linkedin.com/posts/fueler_mememarketing-memes-portfoliowebsite-activity-7165712051099615234-CLuZ" target="_blank">View →</a>
+    </div>
+    <div class="shout-card">
+      <div class="shout-icon">🔗</div>
+      <h3>The Amplified Reach</h3>
+      <p>Prakhar Jain, India Head at Fave Payments, personally shared the RuPay blog for its detailed, comprehensive breakdown.</p>
+      <a href="https://www.linkedin.com/feed/update/urn:li:activity:7201491864892420096" target="_blank">View →</a>
+    </div>
+    <div class="shout-card">
+      <div class="shout-icon">💡</div>
+      <h3>Ode to Unique Ideas</h3>
+      <p>Received a personal note of appreciation from Sandhya, Head of Marketing at Backspace Tech, for a creative blog poster concept.</p>
+      <a href="https://www.linkedin.com/posts/sandhyamanikandan_swiftdecoding-the-global-web-of-financial-activity-7157608746515406848-YCBs" target="_blank">View →</a>
+    </div>
+    <div class="shout-card">
+      <div class="shout-icon">📖</div>
+      <h3>The True Impact</h3>
+      <p>The fintech industry's first chargeback comic book (co-authored) received widespread reader acclaim — reviewed and shared organically.</p>
+      <a href="https://www.linkedin.com/posts/sandhyamanikandan_sandhyasays-fintech-backspacetech-activity-7193435772987871232-PHay" target="_blank">View →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Let's tell a great story together.</h2>
+  <p>Have a brand, a product, or a big idea that needs the right words? I'm one message away.</p>
+  <div class="contact-links">
+    <a href="mailto:narayani.sri2000@gmail.com" class="contact-btn contact-btn-light">✉ narayani.sri2000@gmail.com</a>
+    <a href="https://www.linkedin.com/in/narayani-s/" target="_blank" class="contact-btn contact-btn-dark">🔗 LinkedIn Profile</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Narayani S. · Content Writer & Marketer · Made with ♥
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
